@@ -73,16 +73,7 @@ def print_article(url):
         print("Response:", response.text)
         return f"Error: {response.status_code}"
 
+# **** NOTES ****
 # Current api does not need to be translated to Vietnamese; however, it does not bring up many articles for some categories.
 # Perhaps web scraping or utilizing more than one API may help improve results for some more niche interests/categories.
 # I am considering using the paid version of this API to demo this program better, but for now the free API will do for functionality tests.
-def main():
-    category = input("Enter a news category in English (ie. politics, sports, etc.) to search for: ") 
-    res = []
-    res = get_news(category)
-
-    url = input("Enter the exact url of the article you would like to view: ") # I will change to a system like a number representing each article and selecting the number
-    article_res = print_article(url)
-
-if __name__=="__main__":
-    main()
