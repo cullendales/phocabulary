@@ -33,7 +33,7 @@ def common_words(article_data):
                     "lại", "đang", "sẽ", "vừa", "đã"
                 }
 
-    for word in word_count:
+    for word in list(word_count):
         if word_count[word] in common_words:
             del word_count[word]
 
