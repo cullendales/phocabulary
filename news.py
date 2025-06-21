@@ -1,11 +1,14 @@
 import worldnewsapi
 from worldnewsapi.rest import ApiException
 import requests
+from dotenv import load_dotenv
+import os
 
 # utilizing API from https://worldnewsapi.com
 # current implementation to retrieve news in vietnamese. The free version works okay, but only obtains news within 30 
 
-API_KEY = "..." # insert free worldnews API code here or just ask me for mine
+load_dotenv()
+API_KEY = os.getenv("API_KEY") # insert free worldnews API code here or just ask me for mine
 KEY_CONFIG = worldnewsapi.Configuration(api_key={'apiKey': API_KEY}) 
 
 def get_news(category):
@@ -21,7 +24,7 @@ def get_news(category):
             response = newsapi_instance.search_news( 
                 source_country='vn',
                 language='vn',
-                earliest_publish_date='2025-05-17', # if getting error change these dates to represent the current day to 30 days ago (sometimes an error still occurs at exactly 30 days)
+                earliest_publish_date='2025-05-22', # if getting error change these dates to represent the current day to 30 days ago (sometimes an error still occurs at exactly 30 days)
                 latest_publish_date='2025-06-15',   
                 categories=category,
                 sort="publish-time",
