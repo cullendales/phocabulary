@@ -12,7 +12,7 @@ def main():
 
     vn_most_used_terms = common_words(article)
 
-    #translate_text(vn_most_used_terms)
+    translate_text(vn_most_used_terms)
 
 if __name__ == "__main__":
     main()
