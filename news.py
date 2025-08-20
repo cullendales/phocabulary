@@ -3,6 +3,8 @@ from worldnewsapi.rest import ApiException
 import requests
 from dotenv import load_dotenv
 import os
+from datetime import date
+import dateutil.relativedelta
 
 # utilizing API from https://worldnewsapi.com
 # current implementation to retrieve news in vietnamese. The free version works okay, but only obtains news within 30 
@@ -17,6 +19,12 @@ def get_news(category):
         max_results = 50
         offset = 0
         all_results = []
+
+        #get dates for 4 weeks ago and today
+        today = date.today()
+        month_ago = today + dateutil.relativedelta.relativedelta(weeks=-4)
+        today = today.strftime('%Y-%m-%d')
+        month_ago = month_ago.strftime('%Y-%m-%d')
         
         while len(all_results) < max_results:
             request_count = min(100, max_results - len(all_results)) 
@@ -24,8 +32,8 @@ def get_news(category):
             response = newsapi_instance.search_news( 
                 source_country='vn',
                 language='vn',
-                earliest_publish_date='2025-05-22', # if getting error change these dates to represent the current day to 30 days ago (sometimes an error still occurs at exactly 30 days)
-                latest_publish_date='2025-06-15',   
+                earliest_publish_date=month_ago,
+                latest_publish_date=today,   
                 categories=category,
                 sort="publish-time",
                 sort_direction="desc",
